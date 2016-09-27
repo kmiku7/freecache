@@ -149,6 +149,13 @@ func (cache *Cache) OverwriteCount() (overwriteCount int64) {
 	return
 }
 
+func (cache *Cache) TotalCount() (totalCount int64) {
+	for i := 0; i < 256; i++ {
+		totalCount += atomic.LoadInt64(&cache.segments[i].totalCount)
+	}
+	return
+}
+
 func (cache *Cache) Clear() {
 	for i := 0; i < 256; i++ {
 		cache.locks[i].Lock()

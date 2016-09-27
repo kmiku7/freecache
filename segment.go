@@ -33,7 +33,6 @@ type entryHdr struct {
 	slotId     uint8
 	reserved   uint16
 }
-
 // a segment contains 256 slots, a slot is an array of entry pointers ordered by hash16 value
 // the entry can be looked up by hash value of the key.
 type segment struct {
@@ -52,7 +51,7 @@ type segment struct {
 }
 
 func newSegment(bufSize int, segId int) (seg segment) {
-	seg.rb = NewRingBuf(bufSize, 0)
+	seg.rb = NewRingBuf(bufSize, 0, int64(segId))
 	seg.segId = segId
 	seg.vacuumLen = int64(bufSize)
 	seg.slotCap = 1
@@ -149,6 +148,7 @@ func (seg *segment) evacuate(entryLen int64, slotId uint8, now uint32) (slotModi
 	var oldHdrBuf [ENTRY_HDR_SIZE]byte
 	consecutiveEvacuate := 0
 	for seg.vacuumLen < entryLen {
+		// oldOff ~ begin
 		oldOff := seg.rb.End() + seg.vacuumLen - seg.rb.Size()
 		seg.rb.ReadAt(oldHdrBuf[:], oldOff)
 		oldHdr := (*entryHdr)(unsafe.Pointer(&oldHdrBuf[0]))
@@ -162,6 +162,7 @@ func (seg *segment) evacuate(entryLen int64, slotId uint8, now uint32) (slotModi
 		}
 		expired := oldHdr.expireAt != 0 && oldHdr.expireAt < now
 		leastRecentUsed := int64(oldHdr.accessTime)*seg.totalCount <= seg.totalTime
+		// consecutiveEvacuate 这个条件很诡异
 		if expired || leastRecentUsed || consecutiveEvacuate > 5 {
 			seg.delEntryPtr(oldHdr.slotId, oldHdr.hash16, oldOff)
 			if oldHdr.slotId == slotId {
@@ -176,6 +177,7 @@ func (seg *segment) evacuate(entryLen int64, slotId uint8, now uint32) (slotModi
 			}
 		} else {
 			// evacuate an old entry that has been accessed recently for better cache hit rate.
+			// 数据移动到rb的尾部
 			newOff := seg.rb.Evacuate(oldOff, int(oldEntryLen))
 			seg.updateEntryPtr(oldHdr.slotId, oldHdr.hash16, oldOff, newOff)
 			consecutiveEvacuate++
@@ -277,6 +279,7 @@ func (seg *segment) delEntryPtr(slotId uint8, hash16 uint16, offset int64) {
 	var entryHdrBuf [ENTRY_HDR_SIZE]byte
 	seg.rb.ReadAt(entryHdrBuf[:], offset)
 	entryHdr := (*entryHdr)(unsafe.Pointer(&entryHdrBuf[0]))
+	// rb里标记删除
 	entryHdr.deleted = true
 	seg.rb.WriteAt(entryHdrBuf[:], offset)
 	copy(slot[idx:], slot[idx+1:])
@@ -298,6 +301,7 @@ func entryPtrIdx(slot []entryPtr, hash16 uint16) (idx int) {
 	return
 }
 
+// hash匹配时用key比较
 func (seg *segment) lookup(slot []entryPtr, hash16 uint16, key []byte) (idx int, match bool) {
 	idx = entryPtrIdx(slot, hash16)
 	for idx < len(slot) {
@@ -314,6 +318,7 @@ func (seg *segment) lookup(slot []entryPtr, hash16 uint16, key []byte) (idx int,
 	return
 }
 
+// hash匹配时用offset比较
 func (seg *segment) lookupByOff(slot []entryPtr, hash16 uint16, offset int64) (idx int, match bool) {
 	idx = entryPtrIdx(slot, hash16)
 	for idx < len(slot) {

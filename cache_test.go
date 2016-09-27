@@ -10,8 +10,13 @@ import (
 	"time"
 )
 
+const (
+	DemoString = `{"data_source":0,"driver_meters":{"3090049679":{"order_id":3090049679,"cap_seat":1,"is_carpool_succ":false,"pre_total_price":780,"travel_end":0,"dist_fallback_method":0,"realtime_pricing_count":0,"begin_charge_lng":"0","begin_charge_lat":"0","real_normal_distance":18949.80554898524,"real_time":2083.5,"normal_distance":18949.80554898524,"time":2083.5,"night_distance":0,"empty_distance":0,"low_speed_time_normal":0,"low_speed_time_peak":0,"dynamic_price":0,"dynamic_times":80,"discount":0,"fixed_price":0,"cap_discount_max_fee":0,"combo_use_distance":0,"combo_remain_distance":0,"combo_use_time":0,"combo_remain_time":0,"package_price":0,"highway_fee":0,"bridge_fee":0,"park_fee":0,"other_fee":0,"punish_fee":0,"forward_fee":0,"tip_fee":0,"bonus_fee":0,"LocationsNum":0,"NetLocationsNum":0,"IsLostLocationsFor5Min":false,"IsAdjacentLocMoreThan1kmAnd3Min":false,"CreateScene":2,"DelteGap":false},"3090649300":{"order_id":3090649300,"cap_seat":1,"is_carpool_succ":false,"pre_total_price":202,"travel_end":0,"dist_fallback_method":0,"realtime_pricing_count":0,"begin_charge_lng":"0","begin_charge_lat":"0","real_normal_distance":4651.611318297932,"real_time":521.5,"normal_distance":4651.611318297932,"time":521.5,"night_distance":0,"empty_distance":0,"low_speed_time_normal":0,"low_speed_time_peak":0,"dynamic_price":0,"dynamic_times":0,"discount":0,"fixed_price":0,"cap_discount_max_fee":0,"combo_use_distance":0,"combo_remain_distance":0,"combo_use_time":0,"combo_remain_time":0,"package_price":0,"highway_fee":0,"bridge_fee":0,"park_fee":0,"other_fee":0,"punish_fee":0,"forward_fee":0,"tip_fee":0,"bonus_fee":0,"LocationsNum":0,"NetLocationsNum":0,"IsLostLocationsFor5Min":false,"IsAdjacentLocMoreThan1kmAnd3Min":false,"CreateScene":2,"DelteGap":false}},"latest_locations":{"3090049679":{"x":116.434183,"y":40.02189,"timestamp":1468993769,"locType":1},"3090649300":{"x":116.328917,"y":40.05729,"timestamp":1468992700,"locType":1}},"orders":{"3090049679":{"order_id":3090049679,"driver_id":565076229622303,"driver_phone":"17310132686","passenger_id":2947409184770,"passenger_phone":"13520574347","passenger_count":1,"travel_id":7678452161427373667,"schema_id":5,"combo_type":4,"combo_id":0,"strategy_token":"3774f082a15593a560024c3e0e517755","car_id":0,"area":1,"type":0,"extra_type":3262177,"driver_type":1,"product_id":3,"tip":0,"token":"","product_token":"","is_sep":1,"limit_fee":0,"cap_price":54.7,"dynamic_price":800,"delay_time_start":"","begin_charge_time":"2016-07-20 13:06:01","finish_time":"","driver_display_price":0,"channel":806,"pre_total_fee":78,"pangu":"[]","is_airport":0,"bonus":0,"bouns":0,"airport":0,"strive_car_level":"","start_dest_distance":"0","departure_time":"","starting_lng":"0","starting_lat":"0","dest_lng":"0","dest_lat":"0","order_status":4,"district":"010","abstract_district":"","begin_charge_lng":"0","begin_charge_lat":"0"},"3090649300":{"order_id":3090649300,"driver_id":565076229622303,"driver_phone":"17310132686","passenger_id":25305376,"passenger_phone":"15901099625","passenger_count":1,"travel_id":7678452161427373667,"schema_id":5,"combo_type":4,"combo_id":0,"strategy_token":"3774f082a15593a560024c3e0e517755","car_id":0,"area":1,"type":0,"extra_type":3262181,"driver_type":1,"product_id":3,"tip":0,"token":"","product_token":"","is_sep":1,"limit_fee":0,"cap_price":12.6,"dynamic_price":0,"delay_time_start":"","begin_charge_time":"2016-07-20 13:14:20","finish_time":"","driver_display_price":0,"channel":780,"pre_total_fee":20.2,"pangu":"[]","is_airport":0,"bonus":0,"bouns":0,"airport":0,"strive_car_level":"","start_dest_distance":"0","departure_time":"","starting_lng":"0","starting_lat":"0","dest_lng":"0","dest_lat":"0","order_status":5,"district":"010","abstract_district":"","begin_charge_lng":"0","begin_charge_lat":"0"}},"passenger_meters":{"3090049679":{"order_id":3090049679,"cap_seat":1,"is_carpool_succ":false,"pre_total_price":780,"travel_end":0,"dist_fallback_method":0,"realtime_pricing_count":0,"begin_charge_lng":"0","begin_charge_lat":"0","real_normal_distance":23603.634756770414,"real_time":3596,"normal_distance":23603.634756770414,"time":3596,"night_distance":0,"empty_distance":11603.634756770414,"low_speed_time_normal":0,"low_speed_time_peak":0,"dynamic_price":0,"dynamic_times":80,"discount":0,"fixed_price":547,"cap_discount_max_fee":0,"combo_use_distance":0,"combo_remain_distance":0,"combo_use_time":0,"combo_remain_time":0,"package_price":0,"highway_fee":0,"bridge_fee":0,"park_fee":0,"other_fee":0,"punish_fee":0,"forward_fee":0,"tip_fee":0,"bonus_fee":0,"LocationsNum":0,"NetLocationsNum":0,"IsLostLocationsFor5Min":false,"IsAdjacentLocMoreThan1kmAnd3Min":false,"CreateScene":2,"DelteGap":false},"3090649300":{"order_id":3090649300,"cap_seat":1,"is_carpool_succ":false,"pre_total_price":202,"travel_end":0,"dist_fallback_method":0,"realtime_pricing_count":0,"begin_charge_lng":"0","begin_charge_lat":"0","real_normal_distance":9302.967024333864,"real_time":1040,"normal_distance":9302.967024333864,"time":1040,"night_distance":0,"empty_distance":0,"low_speed_time_normal":0,"low_speed_time_peak":0,"dynamic_price":0,"dynamic_times":0,"discount":0,"fixed_price":126,"cap_discount_max_fee":0,"combo_use_distance":0,"combo_remain_distance":0,"combo_use_time":0,"combo_remain_time":0,"package_price":0,"highway_fee":0,"bridge_fee":0,"park_fee":0,"other_fee":0,"punish_fee":0,"forward_fee":0,"tip_fee":0,"bonus_fee":0,"LocationsNum":0,"NetLocationsNum":0,"IsLostLocationsFor5Min":false,"IsAdjacentLocMoreThan1kmAnd3Min":false,"CreateScene":2,"DelteGap":false}}}`
+
+)
+
 func TestFreeCache(t *testing.T) {
-	cache := NewCache(1024)
+	cache := NewCache(1024*1024*50)
 	if cache.HitRate() != 0 {
 		t.Error("initial hit rate should be zero")
 	}
@@ -42,51 +47,95 @@ func TestFreeCache(t *testing.T) {
 	}
 
 	cache.Clear()
-	n := 5000
+	n := 4000
 	for i := 0; i < n; i++ {
 		keyStr := fmt.Sprintf("key%v", i)
-		valStr := strings.Repeat(keyStr, 10)
-		err = cache.Set([]byte(keyStr), []byte(valStr), 0)
+		valStr := DemoString + strings.Repeat(keyStr, 10)
+		if i == 0 {
+			err = cache.Set([]byte(keyStr), []byte(valStr), 0)
+		} else {
+			err = cache.Set([]byte(keyStr), []byte(valStr), 5)
+		}
+
 		if err != nil {
 			t.Error(err)
 		}
 	}
-	time.Sleep(time.Second)
-	for i := 1; i < n; i += 2 {
-		keyStr := fmt.Sprintf("key%v", i)
-		cache.Get([]byte(keyStr))
-	}
+	t.Logf("hit rate is %v, evacuates %v, entries %v, average time %v, expire count %v, total count %v, cur %v\n",
+		cache.HitRate(), cache.EvacuateCount(), cache.EntryCount(), cache.AverageAccessTime(), cache.ExpiredCount(), cache.TotalCount(), time.Now().Unix())
 
-	for i := 1; i < n; i += 8 {
-		keyStr := fmt.Sprintf("key%v", i)
-		cache.Del([]byte(keyStr))
-	}
 
-	for i := 0; i < n; i += 2 {
-		keyStr := fmt.Sprintf("key%v", i)
-		valStr := strings.Repeat(keyStr, 10)
-		err = cache.Set([]byte(keyStr), []byte(valStr), 0)
+
+	//for i := 1; i < n; i += 2 {
+	//	keyStr := fmt.Sprintf("key%v", i)
+	//	cache.Get([]byte(keyStr))
+	//}
+	//
+	//for i := 1; i < n; i += 8 {
+	//	keyStr := fmt.Sprintf("key%v", i)
+	//	cache.Del([]byte(keyStr))
+	//}
+
+
+
+	for j := 1; j <= 10; j++ {
+		time.Sleep(time.Second*10)
+		key := fmt.Sprintf("key%v", 0)
+		_, err := cache.Get([]byte(key))
 		if err != nil {
 			t.Error(err)
 		}
-	}
-	for i := 1; i < n; i += 2 {
-		keyStr := fmt.Sprintf("key%v", i)
-		expectedValStr := strings.Repeat(keyStr, 10)
-		value, err = cache.Get([]byte(keyStr))
-		if err == nil {
-			if string(value) != expectedValStr {
-				t.Errorf("value is %v, expected %v", string(value), expectedValStr)
+		base := j * n
+		errCount := 0
+		for i := 0; i < n; i += 1 {
+			keyStr := fmt.Sprintf("key%v", base+i)
+			valStr := DemoString + strings.Repeat(keyStr, 10)
+			err = cache.Set([]byte(keyStr), []byte(valStr), 5)
+			if err != nil {
+				//t.Error(err)
+				errCount += 1
 			}
 		}
+
+
+		for i := 0; i < n; i += 1 {
+			keyStr := fmt.Sprintf("key%v", base+i)
+			expectedValStr := DemoString + strings.Repeat(keyStr, 10)
+			value, err = cache.Get([]byte(keyStr))
+			if err == nil {
+				if string(value) != expectedValStr {
+					t.Errorf("value is %v, expected %v", string(value), expectedValStr)
+				}
+			} else {
+				t.Error(err)
+			}
+		}
+
+
+		t.Logf("hit rate is %v, evacuates %v, entries %v, average time %v, expire count %v, total count %v, cur %v, errCount %v\n",
+			cache.HitRate(), cache.EvacuateCount(), cache.EntryCount(), cache.AverageAccessTime(), cache.ExpiredCount(), cache.TotalCount(), time.Now().Unix(), errCount)
 	}
 
-	t.Logf("hit rate is %v, evacuates %v, entries %v, average time %v, expire count %v\n",
-		cache.HitRate(), cache.EvacuateCount(), cache.EntryCount(), cache.AverageAccessTime(), cache.ExpiredCount())
+
+	time.Sleep(time.Second*10)
+	for i := 1; i < n; i += 1 {
+		keyStr := fmt.Sprintf("key%v", i)
+		expectedValStr := strings.Repeat(keyStr, 10)
+		_ = expectedValStr
+		value, err = cache.Get([]byte(keyStr))
+		if err == nil {
+			//if string(value) != expectedValStr {
+			//	t.Errorf("value is %v, expected %v", string(value), expectedValStr)
+			//}
+		}
+	}
+
+	t.Logf("hit rate is %v, evacuates %v, entries %v, average time %v, expire count %v, total count %v, cur %v\n",
+		cache.HitRate(), cache.EvacuateCount(), cache.EntryCount(), cache.AverageAccessTime(), cache.ExpiredCount(), cache.TotalCount(), time.Now().Unix())
 
 	cache.ResetStatistics()
-	t.Logf("hit rate is %v, evacuates %v, entries %v, average time %v, expire count %v\n",
-		cache.HitRate(), cache.EvacuateCount(), cache.EntryCount(), cache.AverageAccessTime(), cache.ExpiredCount())
+	t.Logf("hit rate is %v, evacuates %v, entries %v, average time %v, expire count %v, total count %v, cur %v\n",
+		cache.HitRate(), cache.EvacuateCount(), cache.EntryCount(), cache.AverageAccessTime(), cache.ExpiredCount(), cache.TotalCount(), time.Now().Unix())
 }
 
 func TestOverwrite(t *testing.T) {

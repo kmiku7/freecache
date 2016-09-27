@@ -13,13 +13,15 @@ var ErrOutOfRange = errors.New("out of range")
 // size, old data will be overwritten by new data.
 // It only contains the data in the stream from begin to end
 type RingBuf struct {
+	id int64
 	begin int64 // beginning offset of the data stream.
 	end   int64 // ending offset of the data stream.
 	data  []byte
 	index int //range from '0' to 'len(rb.data)-1'
 }
 
-func NewRingBuf(size int, begin int64) (rb RingBuf) {
+func NewRingBuf(size int, begin int64, id int64) (rb RingBuf) {
+	rb.id = id
 	rb.data = make([]byte, size)
 	rb.begin = begin
 	rb.end = begin
@@ -123,6 +125,10 @@ func (rb *RingBuf) WriteAt(p []byte, off int64) (n int, err error) {
 			n += copy(rb.data[:writeEnd-len(rb.data)], p[n:])
 		}
 	}
+	if rb.id == 1 {
+		fmt.Printf("begin\t%d\t%d\t%p\t%d\t%d\t%d\t%d\n", rb.begin, rb.end, rb, len(rb.data), rb.begin % int64(len(rb.data)), rb.end % int64(len(rb.data)), rb.index)
+	}
+
 	return
 }
 
@@ -231,6 +237,9 @@ func (rb *RingBuf) Resize(newSize int) {
 	rb.index = 0
 }
 
+// index会rotate, end & begin 永远单向递增?
+// 是的
+// 数据永远在一个递增的地址空间上写入
 func (rb *RingBuf) Skip(length int64) {
 	rb.end += length
 	rb.index += int(length)

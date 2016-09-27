@@ -5,7 +5,7 @@ import (
 )
 
 func TestRingBuf(t *testing.T) {
-	rb := NewRingBuf(16, 0)
+	rb := NewRingBuf(16, 0, 0)
 	rb.Write([]byte("fghibbbbccccddde"))
 	rb.Write([]byte("fghibbbbc"))
 	rb.Resize(16)
